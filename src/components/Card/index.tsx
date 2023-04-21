@@ -17,7 +17,7 @@ export function Card() {
 
       <div>
         <header>
-          <p>Saida</p>
+          <p>Saidas</p>
           <img src={saida} alt="logo" />
         </header>
         <strong>- R$500,00</strong>
