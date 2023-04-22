@@ -10,6 +10,10 @@ export const Container = styled.button`
   border-radius: 0.25rem;
   padding: 0.875rem;
   cursor: pointer;
+  &:focus {
+    background: var(--text-body);
+    color: var(--shape);
+  }
 
   > img {
     position: absolute;

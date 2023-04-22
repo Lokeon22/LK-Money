@@ -1,10 +1,8 @@
+import { ComponentPropsWithoutRef } from "react";
 import { Container } from "./style";
 
-interface InputProps {
-  text: string;
-  type: "text" | "number";
-}
+interface InputProps extends ComponentPropsWithoutRef<"input"> {}
 
-export function Input({ text, type }: InputProps) {
-  return <Container placeholder={text} type={type}></Container>;
+export function Input({ ...rest }: InputProps) {
+  return <Container {...rest}></Container>;
 }

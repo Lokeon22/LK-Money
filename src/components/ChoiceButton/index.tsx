@@ -3,13 +3,20 @@ import { Container } from "./style";
 interface ButtonProps {
   text: string;
   icon: string;
-  value: "Entry" | "Exit";
-  handleValue: (value: string) => void;
+  value: "entry" | "exit";
+  handleValue: (
+    value: string,
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
 }
 
 export function ChoiceButton({ text, icon, value, handleValue }: ButtonProps) {
   return (
-    <Container onClick={() => handleValue(value)} type="button" value={value}>
+    <Container
+      onClick={(e) => handleValue(value, e)}
+      type="button"
+      value={value}
+    >
       {text}
       <img src={icon} />
     </Container>
