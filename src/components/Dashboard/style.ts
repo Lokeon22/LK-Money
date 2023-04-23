@@ -14,9 +14,9 @@ export const CardContainer = styled.section`
 
   div:last-child {
     p {
-      color: #fff;
+      color: var(--shape);
     }
     background: var(--green);
-    color: #fff;
+    color: var(--shape);
   }
 `;

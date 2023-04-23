@@ -1,6 +1,5 @@
 import { Container, Content } from "./style";
 
-import logo from "../../assets/logo.svg";
 import { Button } from "../Button";
 
 interface HeaderProps {
@@ -15,7 +14,9 @@ export function Header({ setModal }: HeaderProps) {
   return (
     <Container>
       <Content>
-        <img src={logo} alt="lk money" />
+        <h2>
+          <strong>LK</strong> money
+        </h2>
         <Button handleModal={handleModal} />
       </Content>
     </Container>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
-  background: var(--blue);
+  background: var(--black);
 `;
 
 export const Content = styled.div`
@@ -12,4 +12,12 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  h2 {
+    color: var(--shape);
+
+    strong {
+      color: var(--gold);
+    }
+  }
 `;

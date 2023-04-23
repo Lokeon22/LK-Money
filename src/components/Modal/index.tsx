@@ -61,7 +61,12 @@ export function Modal({ setModal, setKeyRefresh, keyrefresh }: ModalProps) {
         <Content>
           <img onClick={() => setModal(false)} src={close} alt="Close Modal" />
           <h2>Cadastrar transação</h2>
-          <div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleCreate();
+            }}
+          >
             <Input
               type="text"
               placeholder="Nome"
@@ -103,8 +108,8 @@ export function Modal({ setModal, setKeyRefresh, keyrefresh }: ModalProps) {
               />
             </nav>
 
-            <ButtonCadastro onClick={handleCreate}>Cadastrar</ButtonCadastro>
-          </div>
+            <ButtonCadastro type="submit">Cadastrar</ButtonCadastro>
+          </form>
         </Content>
       </Container>
     </Overlay>

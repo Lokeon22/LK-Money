@@ -43,7 +43,7 @@ export const Content = styled.div`
     margin-bottom: 2rem;
   }
 
-  > div {
+  > form {
     width: 100%;
     display: flex;
     flex-direction: column;

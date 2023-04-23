@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { FaArrowRight } from "react-icons/fa";
 import { usePagination } from "../../hook/usePagination";
 
 import { Container } from "./style";
 import { TableBody } from "../TableBody";
-import { Pagination } from "../Pagination";
-import { DataProps } from "../../models/ItensType";
 import { Button } from "../Button";
+
+import { DataProps } from "../../models/ItensType";
 
 interface TransactionProps {
   keyRefresh: boolean;
@@ -15,24 +15,9 @@ interface TransactionProps {
 
 export function TransactionsTable({ keyRefresh, setModal }: TransactionProps) {
   const [select, setSelect] = useState<string>("");
-  const [page, setPage] = useState<number>(1);
 
-  const { itens, itensFiltered, currentItens, pagesFilter, setCurrentPage } =
-    usePagination<DataProps>(keyRefresh, select, page);
-
-  function nextPage(itemData: number) {
-    if (itemData === 6) {
-      setPage(page + 1);
-    }
-    return;
-  }
-
-  function previousPage() {
-    if (page <= 1) {
-      return;
-    }
-    setPage(page - 1);
-  }
+  const { itens, nextPage, previousPage, page, setPage } =
+    usePagination<DataProps>(keyRefresh, select);
 
   function handleModal() {
     setModal(true);
@@ -45,7 +30,10 @@ export function TransactionsTable({ keyRefresh, setModal }: TransactionProps) {
         <select
           required
           value={select}
-          onChange={({ target }) => setSelect(target.value)}
+          onChange={({ target }) => {
+            setSelect(target.value);
+            setPage(1);
+          }}
         >
           <option value="">Transações</option>
           <option value="entry">Entradas</option>
@@ -71,29 +59,17 @@ export function TransactionsTable({ keyRefresh, setModal }: TransactionProps) {
               </td>
             </tr>
           )}
-          {itensFiltered.length <= 0 ? (
-            <>
-              {itens.map((item) => {
-                return <TableBody key={item.id} data={item} />;
-              })}
-            </>
-          ) : (
-            currentItens.map((item) => {
-              return <TableBody key={item.id} data={item} />;
-            })
-          )}
+          {itens.map((item) => {
+            return <TableBody key={item.id} data={item} />;
+          })}
         </tbody>
       </table>
-      {itensFiltered.length <= 0 && (
-        <nav>
-          <BsArrowLeft onClick={previousPage} />
-          {page}
-          <BsArrowRight onClick={() => nextPage(itens.length)} />
-        </nav>
-      )}
-      {pagesFilter > 1 && (
-        <Pagination pagesFilter={pagesFilter} setCurrentPage={setCurrentPage} />
-      )}
+
+      <nav>
+        <FaArrowRight onClick={previousPage} />
+        {page}
+        <FaArrowRight onClick={() => nextPage(itens.length)} />
+      </nav>
     </Container>
   );
 }

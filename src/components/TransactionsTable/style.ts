@@ -35,13 +35,18 @@ export const Container = styled.div`
     align-items: center;
     gap: 1rem;
     margin-top: 1rem;
+    font-size: 1.1rem;
+
+    svg:first-child {
+      rotate: 180deg;
+    }
 
     > svg {
       width: 1.5rem;
       height: 1.5rem;
       cursor: pointer;
       &:hover {
-        color: var(--blue);
+        color: var(--blue-light);
         transition-delay: 0.2s;
       }
     }
