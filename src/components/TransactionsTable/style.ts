@@ -1,7 +1,20 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin-top: 4rem;
+  margin-top: 2rem;
+
+  > div {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    select {
+      padding: 0.25rem;
+      border-radius: 0.25rem;
+    }
+  }
 
   table {
     width: 100%;
@@ -16,24 +29,21 @@ export const Container = styled.div`
     font-weight: 400;
   }
 
-  td {
-    padding: 1rem 2rem;
-    background: var(--shape);
-    border-radius: 0.25rem;
-    border: 0;
-    color: var(--text-body);
-    font-weight: 400;
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
 
-    &:first-child {
-      color: var(--text-title);
-    }
-
-    &.entrada {
-      color: var(--green);
-    }
-
-    &.retirada {
-      color: var(--red);
+    > svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      cursor: pointer;
+      &:hover {
+        color: var(--blue);
+        transition-delay: 0.2s;
+      }
     }
   }
 `;

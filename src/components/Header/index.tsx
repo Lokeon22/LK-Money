@@ -1,6 +1,7 @@
-import logo from "../../assets/logo.svg";
-
 import { Container, Content } from "./style";
+
+import logo from "../../assets/logo.svg";
+import { Button } from "../Button";
 
 interface HeaderProps {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,9 +16,7 @@ export function Header({ setModal }: HeaderProps) {
     <Container>
       <Content>
         <img src={logo} alt="lk money" />
-        <button type="button" onClick={handleModal}>
-          Nova transação
-        </button>
+        <Button handleModal={handleModal} />
       </Content>
     </Container>
   );

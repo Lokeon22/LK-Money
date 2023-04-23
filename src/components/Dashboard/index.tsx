@@ -35,13 +35,19 @@ export function Dashboard({ modal, setModal }: DashboardProps) {
 
   return (
     <Container>
-      {modal && <Modal setModal={setModal} setKeyRefresh={setKeyRefresh} />}
+      {modal && (
+        <Modal
+          setModal={setModal}
+          keyrefresh={keyRefresh}
+          setKeyRefresh={setKeyRefresh}
+        />
+      )}
       <CardContainer>
         <Card text="Entradas" icon={entradaIcon} total={entradas} />
         <Card text="Saidas" icon={saidaIcon} total={saidas} />
         <Card text="Total" icon={moneyIcon} total={total} />
       </CardContainer>
-      <TransactionsTable keyRefresh={keyRefresh} />
+      <TransactionsTable keyRefresh={keyRefresh} setModal={setModal} />
     </Container>
   );
 }

@@ -9,10 +9,11 @@ import close from "../../assets/close.svg";
 
 interface ModalProps {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  keyrefresh: boolean;
   setKeyRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function Modal({ setModal, setKeyRefresh }: ModalProps) {
+export function Modal({ setModal, setKeyRefresh, keyrefresh }: ModalProps) {
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [type, setType] = useState<string>("");
@@ -25,8 +26,11 @@ export function Modal({ setModal, setKeyRefresh }: ModalProps) {
   }
 
   async function handleCreate() {
-    if (!name || !price || !type || !category)
-      return alert("Preencha todos os campos");
+    if (!name || !price || !category) return alert("Preencha todos os campos");
+
+    if (price.length < 4) return alert("Digite um preço válido. Exemplo: 1,00");
+
+    if (!type) return alert("Selecione um tipo de transação");
 
     await fetch("http://localhost:3000/create", {
       method: "POST",
@@ -38,7 +42,7 @@ export function Modal({ setModal, setKeyRefresh }: ModalProps) {
       .then(() => {
         alert("Item adicionado");
         setModal(false);
-        setKeyRefresh(true);
+        setKeyRefresh(!keyrefresh);
       })
       .catch((error) => console.log(error));
   }
@@ -66,7 +70,7 @@ export function Modal({ setModal, setKeyRefresh }: ModalProps) {
             />
             <Input
               type="text"
-              placeholder="Price"
+              placeholder="Preço"
               value={price}
               onChange={({ target }) =>
                 setPrice(
