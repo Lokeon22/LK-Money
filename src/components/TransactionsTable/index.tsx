@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { usePagination } from "../../hooks/usePagination";
+import { Pagination } from "../Pagination";
 
-import { Container } from "./style";
+import { Container, ContentMobile } from "./style";
+import { TransactionMobile } from "../TransactionMobile";
 import { TableBody } from "../TableBody";
-import { Button } from "../Button";
 
 import { DataProps } from "../../models/ItensType";
 
@@ -13,14 +14,25 @@ interface TransactionProps {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function TransactionsTable({ keyRefresh, setModal }: TransactionProps) {
+export function TransactionsTable({ keyRefresh }: TransactionProps) {
   const [select, setSelect] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
 
-  const { itens, nextPage, previousPage, page, setPage } =
-    usePagination<DataProps>(keyRefresh, select);
+  const { itens, itensFiltered, currentItens, pagesFilter, setCurrentPage } =
+    usePagination<DataProps>(keyRefresh, select, page);
 
-  function handleModal() {
-    setModal(true);
+  function nextPage(itemLenght: number) {
+    if (itemLenght === 6) {
+      setPage(page + 1);
+    }
+    return;
+  }
+
+  function previousPage() {
+    if (page <= 1) {
+      return;
+    }
+    setPage(page - 1);
   }
 
   return (
@@ -53,22 +65,66 @@ export function TransactionsTable({ keyRefresh, setModal }: TransactionProps) {
         <tbody>
           {itens.length <= 0 && (
             <tr>
-              <td>Não há mais transações recentes... </td>
-              <td>
-                <Button handleModal={handleModal} />
-              </td>
+              <td>Não há transações recentes...</td>
             </tr>
           )}
-          {itens.map((item) => {
-            return <TableBody key={item.id} data={item} />;
-          })}
+          {itensFiltered.length <= 0 ? (
+            <>
+              {itens.map((item) => {
+                return <TableBody key={item.id} data={item} />;
+              })}
+            </>
+          ) : (
+            currentItens.map((item) => {
+              return <TableBody key={item.id} data={item} />;
+            })
+          )}
         </tbody>
       </table>
 
+      <ContentMobile>
+        <header>
+          <h2>Listagem</h2>
+          {itensFiltered.length <= 0 ? (
+            <p>{itens.length} itens</p>
+          ) : (
+            <p>{itensFiltered.length} itens</p>
+          )}
+        </header>
+        <section>
+          {itens.length <= 0 && (
+            <div>
+              <p>Não há transações recentes...</p>
+            </div>
+          )}
+          {itensFiltered.length <= 0 ? (
+            <>
+              {itens.map((item) => {
+                return <TransactionMobile key={item.id} item={item} />;
+              })}
+            </>
+          ) : (
+            currentItens.map((item) => {
+              return <TransactionMobile key={item.id} item={item} />;
+            })
+          )}
+        </section>
+      </ContentMobile>
+
       <nav>
-        <FaArrowRight onClick={previousPage} />
-        {page}
-        <FaArrowRight onClick={() => nextPage(itens.length)} />
+        {itensFiltered.length <= 0 && (
+          <nav>
+            <FaArrowRight onClick={previousPage} />
+            {page}
+            <FaArrowRight onClick={() => nextPage(itens.length)} />
+          </nav>
+        )}
+        {pagesFilter > 1 && (
+          <Pagination
+            pagesFilter={pagesFilter}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
       </nav>
     </Container>
   );

@@ -42,7 +42,6 @@ export function Modal({ setModal, setKeyRefresh, keyrefresh }: ModalProps) {
       body: JSON.stringify({ name, price, type, category }),
     })
       .then(() => {
-        alert("Item adicionado");
         setModal(false);
         setKeyRefresh(!keyrefresh);
       })

@@ -12,13 +12,15 @@ interface ButtonProps {
 
 export function ChoiceButton({ text, icon, value, handleValue }: ButtonProps) {
   return (
-    <Container
-      onClick={(e) => handleValue(value, e)}
-      type="button"
-      value={value}
-    >
-      {text}
-      <img src={icon} />
+    <Container>
+      <button
+        onClick={(e) => handleValue(value, e)}
+        type="button"
+        value={value}
+      >
+        <img src={icon} />
+        {text}
+      </button>
     </Container>
   );
 }

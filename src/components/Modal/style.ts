@@ -27,6 +27,18 @@ export const Container = styled.div`
   border-radius: 0.25rem;
 
   animation: ${ChangeOpacity} 0.3s ease;
+
+  @media screen and (max-width: 640px) {
+    top: 42%;
+    left: 0;
+    transform: translate(0%, 0%);
+    bottom: 0;
+    border-radius: 1.5rem 1.5rem 0rem 0rem;
+  }
+
+  @media screen and (max-width: 340px) {
+    top: 22%;
+  }
 `;
 
 export const Content = styled.div`
@@ -39,6 +51,14 @@ export const Content = styled.div`
     top: 5px;
     left: 92%;
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 640px) {
+    padding: 1.5rem;
+
+    > img {
+      left: 89%;
+    }
   }
 
   h2 {

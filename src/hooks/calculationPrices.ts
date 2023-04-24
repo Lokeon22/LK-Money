@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { DataProps } from "../models/ItensType";
 
-const baseURL = "http://localhost:3000";
+const baseURL: string = "http://localhost:3000";
 
 interface DataPricesProps {
   type: "entry" | "exit";

@@ -18,4 +18,8 @@ export const Container = styled.div`
     font-weight: 500;
     margin-top: 1rem;
   }
+
+  @media screen and (max-width: 640px) {
+    min-width: 260px;
+  }
 `;

@@ -16,6 +16,12 @@ export const Container = styled.div`
     }
   }
 
+  @media screen and (max-width: 769px) {
+    table {
+      display: none;
+    }
+  }
+
   table {
     width: 100%;
     border-spacing: 0 0.5rem;
@@ -50,5 +56,24 @@ export const Container = styled.div`
         transition-delay: 0.2s;
       }
     }
+  }
+`;
+
+export const ContentMobile = styled.section`
+  @media screen and (min-width: 769px) {
+    display: none;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 `;
