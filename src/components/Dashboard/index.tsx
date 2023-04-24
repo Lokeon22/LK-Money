@@ -1,6 +1,6 @@
 import { Container, CardContainer } from "./style";
 import { useState } from "react";
-import { getDataPrices } from "../../hook/calculationPrices";
+import { getDataPrices } from "../../hooks/calculationPrices";
 
 import { Card } from "../Card";
 import { TransactionsTable } from "../TransactionsTable";
@@ -18,22 +18,21 @@ interface DashboardProps {
 export function Dashboard({ modal, setModal }: DashboardProps) {
   const [keyRefresh, setKeyRefresh] = useState<boolean>(false);
 
-  const { typePrice: entradaPrice, convertCurrency } = getDataPrices({
+  const { typePrice: entradaPrice, currencyFormated: entrada } = getDataPrices({
     type: "entry",
     keyRefresh,
   });
 
-  const { typePrice: saidaPrice } = getDataPrices({
+  const { typePrice: saidaPrice, currencyFormated: saida } = getDataPrices({
     type: "exit",
     keyRefresh,
   });
 
-  const { currencyFormated: entradas } = convertCurrency(entradaPrice);
-
-  const { currencyFormated: saidas } = convertCurrency(saidaPrice);
-
   const totalValue = entradaPrice - saidaPrice;
-  const { currencyFormated: total } = convertCurrency(totalValue);
+  const total = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(totalValue);
 
   return (
     <Container>
@@ -45,8 +44,8 @@ export function Dashboard({ modal, setModal }: DashboardProps) {
         />
       )}
       <CardContainer>
-        <Card text="Entradas" icon={entradaIcon} total={entradas} />
-        <Card text="Saidas" icon={saidaIcon} total={saidas} />
+        <Card text="Entradas" icon={entradaIcon} total={entrada} />
+        <Card text="Saidas" icon={saidaIcon} total={saida} />
         <Card text="Total" icon={moneyIcon} total={total} />
       </CardContainer>
       <TransactionsTable keyRefresh={keyRefresh} setModal={setModal} />

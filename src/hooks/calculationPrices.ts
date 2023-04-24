@@ -22,18 +22,14 @@ export function getDataPrices({ type, keyRefresh }: DataPricesProps) {
     });
   }
 
-  function convertCurrency(price: number) {
-    const currencyFormated = new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(price);
-
-    return { currencyFormated };
-  }
+  const currencyFormated = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(typePrice);
 
   useEffect(() => {
     getActualPrice();
   }, [keyRefresh]);
 
-  return { typePrice, convertCurrency };
+  return { typePrice, currencyFormated };
 }

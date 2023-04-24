@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
-import { usePagination } from "../../hook/usePagination";
+import { usePagination } from "../../hooks/usePagination";
 
 import { Container } from "./style";
 import { TableBody } from "../TableBody";
