@@ -13,7 +13,9 @@ export function TableBody({ data }: TableBodyProps) {
         {data.type == "entry" ? `R$ ${data.price}` : `- R$ ${data.price}`}
       </td>
       <td>{data.category}</td>
-      <td>{data.created_at.slice(0, 10).split("-").reverse().join("/")}</td>
+      <td>
+        {new Intl.DateTimeFormat("pt-BR").format(new Date(data.created_at))}
+      </td>
     </Container>
   );
 }

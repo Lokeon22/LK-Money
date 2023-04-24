@@ -25,7 +25,9 @@ export function Modal({ setModal, setKeyRefresh, keyrefresh }: ModalProps) {
     }
   }
 
-  async function handleCreate() {
+  async function handleCreate(e: React.FormEvent) {
+    e.preventDefault();
+
     if (!name || !price || !category) return alert("Preencha todos os campos");
 
     if (price.length < 4) return alert("Digite um preço válido. Exemplo: 1,00");
@@ -61,12 +63,7 @@ export function Modal({ setModal, setKeyRefresh, keyrefresh }: ModalProps) {
         <Content>
           <img onClick={() => setModal(false)} src={close} alt="Close Modal" />
           <h2>Cadastrar transação</h2>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleCreate();
-            }}
-          >
+          <form onSubmit={handleCreate}>
             <Input
               type="text"
               placeholder="Nome"

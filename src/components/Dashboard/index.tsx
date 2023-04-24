@@ -1,7 +1,6 @@
 import { Container, CardContainer } from "./style";
 import { useState } from "react";
 import { getDataPrices } from "../../hook/calculationPrices";
-import { convert } from "../../hook/formatedCurrency";
 
 import { Card } from "../Card";
 import { TransactionsTable } from "../TransactionsTable";
@@ -19,19 +18,22 @@ interface DashboardProps {
 export function Dashboard({ modal, setModal }: DashboardProps) {
   const [keyRefresh, setKeyRefresh] = useState<boolean>(false);
 
-  const { typePrice: entradaPrice } = getDataPrices({
+  const { typePrice: entradaPrice, convertCurrency } = getDataPrices({
     type: "entry",
     keyRefresh,
   });
 
-  const { typePrice: saidaPrice } = getDataPrices({ type: "exit", keyRefresh });
+  const { typePrice: saidaPrice } = getDataPrices({
+    type: "exit",
+    keyRefresh,
+  });
 
-  const { currencyFormated: entradas } = convert(entradaPrice);
+  const { currencyFormated: entradas } = convertCurrency(entradaPrice);
 
-  const { currencyFormated: saidas } = convert(saidaPrice);
+  const { currencyFormated: saidas } = convertCurrency(saidaPrice);
 
-  let totalValue = entradaPrice - saidaPrice;
-  const { currencyFormated: total } = convert(totalValue);
+  const totalValue = entradaPrice - saidaPrice;
+  const { currencyFormated: total } = convertCurrency(totalValue);
 
   return (
     <Container>

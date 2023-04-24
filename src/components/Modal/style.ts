@@ -16,6 +16,8 @@ export const Overlay = styled.div`
 `;
 
 export const Container = styled.div`
+  width: 100%;
+  max-width: 576px;
   position: fixed;
   display: flex;
   background: var(--background);
@@ -28,6 +30,7 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
+  width: 100%;
   position: relative;
   padding: 4rem 3rem;
 

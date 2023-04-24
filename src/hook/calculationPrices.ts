@@ -4,7 +4,7 @@ import { DataProps } from "../models/ItensType";
 const baseURL = "http://localhost:3000";
 
 interface DataPricesProps {
-  type: string;
+  type: "entry" | "exit";
   keyRefresh: boolean;
 }
 
@@ -17,14 +17,23 @@ export function getDataPrices({ type, keyRefresh }: DataPricesProps) {
       (res) => res.json()
     );
     res.map((item) => {
-      let currencyFormated = +item.price.replace(".", "").replace(",", ".");
-      return setTypePrice((priceTotal += currencyFormated));
+      let priceFormated = +item.price.replace(".", "").replace(",", ".");
+      return setTypePrice((priceTotal += priceFormated));
     });
+  }
+
+  function convertCurrency(price: number) {
+    const currencyFormated = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(price);
+
+    return { currencyFormated };
   }
 
   useEffect(() => {
     getActualPrice();
   }, [keyRefresh]);
 
-  return { typePrice };
+  return { typePrice, convertCurrency };
 }
