@@ -7,6 +7,8 @@ import entrada from "../../assets/entrada.svg";
 import saida from "../../assets/saida.svg";
 import close from "../../assets/close.svg";
 
+const baseURL: string = "https://lk-money-api.onrender.com";
+
 interface ModalProps {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   keyrefresh: boolean;
@@ -34,7 +36,7 @@ export function Modal({ setModal, setKeyRefresh, keyrefresh }: ModalProps) {
 
     if (!type) return alert("Selecione um tipo de transação");
 
-    await fetch("http://localhost:3000/create", {
+    await fetch(`${baseURL}/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
