@@ -13,7 +13,10 @@ export function Pagination({ pagesFilter, setCurrentPage }: PaginationProps) {
           <Container
             key={index}
             value={index}
-            onClick={(e: any) => setCurrentPage(Number(e.target.value))}
+            onClick={(e: any) => {
+              setCurrentPage(Number(e.target.value));
+              console.log(item);
+            }}
           >
             {index + 1}
           </Container>
